@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Joke Generator 😂</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #fddb92 0%, #d1fdff 100%);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      text-align: center;
+      color: #333;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .joke-box {
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+    }
+
+    .setup {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .punchline {
+      font-size: 1.3rem;
+      margin-top: 10px;
+      color: #555;
+    }
+
+    button {
+      background-color: #6c5ce7;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 10px;
+      margin-top: 20px;
+      margin-right: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #4834d4;
+    }
+
+    .nav-buttons {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Joke Generator 😂</h1>
+
+  <div class="joke-box">
+    <div class="setup" id="setup">Click the button to hear a joke!</div>
+    <div class="punchline" id="punchline"></div>
+    <button onclick="newJoke()">Tell Me a Joke</button>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="nav-buttons">
+    <button onclick="location.href='index.html'">Main Menu</button>
+    <button onclick="location.href='scratch.html'">Tiger Woods</button>
+  </div>
+
+  <script>
+    const jokes = [
+      {
+        setup: "Why don’t skeletons fight each other?",
+        punchline: "Because they don’t have the guts."
+      },
+      {
+        setup: "I'm reading a book about anti-gravity.",
+        punchline: "It's impossible to put down!"
+      },
+      {
+        setup: "Why did the scarecrow win an award?",
+        punchline: "Because he was outstanding in his field!"
+      },
+      {
+        setup: "Parallel lines have so much in common…",
+        punchline: "It’s a shame they’ll never meet."
+      },
+      {
+        setup: "What do you call fake spaghetti?",
+        punchline: "An impasta!"
+      },
+      {
+        setup: "I told my wife she was drawing her eyebrows too high.",
+        punchline: "She looked surprised."
+      },
+      {
+        setup: "Why did the bicycle fall over?",
+        punchline: "Because it was two-tired."
+      },
+      {
+        setup: "I only know 25 letters of the alphabet.",
+        punchline: "I don't know y."
+      }
+    ];
+
+    function newJoke() {
+      const setupEl = document.getElementById("setup");
+      const punchlineEl = document.getElementById("punchline");
+
+      const joke = jokes[Math.floor(Math.random() * jokes.length)];
+
+      setupEl.textContent = joke.setup;
+      punchlineEl.textContent = ""; // Clear punchline first
+
+      // Reveal the punchline after 2 seconds
+      setTimeout(() => {
+        punchlineEl.textContent = joke.punchline;
+      }, 2000);
+    }
+  </script>
+
+</body>
+</html>
