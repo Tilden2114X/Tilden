@@ -2,168 +2,194 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Joke Generator 😂</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snake Game 🐍</title>
   <style>
     body {
-      background: linear-gradient(135deg, #fddb92 0%, #d1fdff 100%);
+      background-color: #2e2e2e;
       font-family: 'Segoe UI', sans-serif;
+      color: white;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      padding: 20px;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+    }
+
+    #gameCanvas {
+      background-color: #1e1e1e;
+      border: 3px solid #4CAF50;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .game-info {
+      position: absolute;
+      top: 10px;
       text-align: center;
-      color: #333;
-      transition: background 0.5s ease;
+      width: 100%;
     }
 
     h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+      font-size: 2.5rem;
+      color: #4CAF50;
     }
 
-    .joke-box {
-      background: #fff;
-      padding: 20px 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      max-width: 600px;
-      transition: box-shadow 0.3s ease;
-    }
-
-    .setup {
+    .score {
       font-size: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 10px;
-      animation: fadeIn 1s ease-in-out;
+      color: #fff;
     }
 
-    .punchline {
-      font-size: 1.3rem;
-      margin-top: 10px;
-      color: #555;
-      opacity: 0;
-      animation: fadeIn 2s ease-in-out forwards;
-    }
-
-    button {
-      background-color: #6c5ce7;
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      font-size: 1rem;
-      border-radius: 10px;
-      margin-top: 20px;
-      margin-right: 10px;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.3s;
-    }
-
-    button:hover {
-      background-color: #4834d4;
-      transform: scale(1.05);
-    }
-
-    .nav-buttons {
-      margin-top: 30px;
-    }
-
-    .nav-buttons button {
-      background-color: #e74c3c;
-      margin-right: 10px;
-    }
-
-    .nav-buttons button:hover {
-      background-color: #c0392b;
-    }
-
-    @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
+    .game-over {
+      display: none;
+      font-size: 2rem;
+      color: #f44336;
     }
   </style>
 </head>
 <body>
 
-  <h1>Joke Generator 😂</h1>
-
-  <div class="joke-box">
-    <div class="setup" id="setup">Click the button to hear a joke!</div>
-    <div class="punchline" id="punchline"></div>
-    <button onclick="newJoke()">Tell Me a Joke</button>
+  <div class="game-info">
+    <h1>Snake Game 🐍</h1>
+    <div class="score">Score: <span id="score">0</span></div>
+    <div class="game-over" id="gameOver">Game Over! Press F5 to Restart</div>
   </div>
 
-  <!-- Navigation Buttons -->
-  <div class="nav-buttons">
-    <button onclick="location.href='index.html'">Main Menu</button>
-    <button onclick="location.href='scratch.html'">Tiger Woods</button>
-  </div>
+  <canvas id="gameCanvas" width="400" height="400"></canvas>
 
   <script>
-    const jokes = [
-      { setup: "Why don’t skeletons fight each other?", punchline: "Because they don’t have the guts." },
-      { setup: "I'm reading a book about anti-gravity.", punchline: "It's impossible to put down!" },
-      { setup: "Why did the scarecrow win an award?", punchline: "Because he was outstanding in his field!" },
-      { setup: "Parallel lines have so much in common…", punchline: "It’s a shame they’ll never meet." },
-      { setup: "What do you call fake spaghetti?", punchline: "An impasta!" },
-      { setup: "I told my wife she was drawing her eyebrows too high.", punchline: "She looked surprised." },
-      { setup: "Why did the bicycle fall over?", punchline: "Because it was two-tired." },
-      { setup: "I only know 25 letters of the alphabet.", punchline: "I don't know y." },
-      { setup: "Why don’t eggs tell each other secrets?", punchline: "Because they might crack up!" },
-      { setup: "What’s orange and sounds like a parrot?", punchline: "A carrot!" },
-      { setup: "What do you call cheese that isn’t yours?", punchline: "Nacho cheese!" },
-      { setup: "I told my computer I needed a break.", punchline: "Now it won’t stop sending me Kit-Kats!" },
-      { setup: "What did the ocean say to the beach?", punchline: "Nothing, it just waved." },
-      { setup: "Why can’t you trust an atom?", punchline: "Because they make up everything!" },
-      { setup: "Why don’t skeletons ever fight each other?", punchline: "Because they don’t have the guts!" },
-      { setup: "Why did the tomato turn red?", punchline: "Because it saw the salad dressing!" },
-      { setup: "Why can’t you trust an atom?", punchline: "Because they make up everything!" },
-      { setup: "What did the grape do when it got stepped on?", punchline: "Nothing, but it let out a little wine!" },
-      { setup: "Why did the chicken join a band?", punchline: "Because it had the drumsticks!" },
-      { setup: "How does a penguin build its house?", punchline: "Igloos it together!" },
-      { setup: "Why don’t oysters share their pearls?", punchline: "Because they’re shellfish!" },
-      { setup: "What’s brown and sticky?", punchline: "A stick!" },
-      { setup: "What did the grape say when it got stepped on?", punchline: "Nothing, but it let out a little wine." },
-      { setup: "What’s a skeleton’s least favorite room in the house?", punchline: "The living room!" },
-      { setup: "What do you get when you cross a snowman and a vampire?", punchline: "Frostbite!" },
-      { setup: "Why can’t you hear a pterodactyl go to the bathroom?", punchline: "Because the P is silent." },
-      { setup: "Why did the stadium get so hot?", punchline: "Because all the fans left!" },
-      { setup: "Why don’t seagulls fly over the bay?", punchline: "Because then they’d be bagels!" },
-      { setup: "What did one hat say to the other?", punchline: "Stay here, I’m going on ahead!" },
-      { setup: "What’s a vampire’s favorite fruit?", punchline: "A nectarine!" },
-      { setup: "Why don’t skeletons ever fight each other?", punchline: "They don’t have the guts!" },
-      { setup: "What do you call a pile of cats?", punchline: "A meow-tain!" },
-      { setup: "What’s the best way to watch a fly fishing tournament?", punchline: "Live stream." },
-      { setup: "Why did the bicycle fall over?", punchline: "Because it was two-tired." },
-      { setup: "Why did the golfer bring two pairs of pants?", punchline: "In case he got a hole in one!" },
-      { setup: "What do you call a snowman with a six-pack?", punchline: "An abdominal snowman!" },
-      { setup: "What’s brown and sticky?", punchline: "A stick!" },
-      { setup: "Why did the scarecrow win an award?", punchline: "Because he was outstanding in his field!" },
-      { setup: "How does a penguin build its house?", punchline: "Igloos it together!" },
-      { setup: "What did one plate say to the other?", punchline: "Lunch is on me!" },
-      { setup: "What’s a skeleton’s least favorite room in the house?", punchline: "The living room!" },
-      { setup: "Why can’t you trust stairs?", punchline: "They’re always up to something!" },
-      { setup: "What did one wall say to the other?", punchline: "I’ll meet you at the corner." },
-      { setup: "Why don’t skeletons fight each other?", punchline: "They don’t have the guts." },
-      { setup: "What do you get when you cross a snowman and a vampire?", punchline: "Frostbite!" },
-      { setup: "Why don’t skeletons ever fight each other?", punchline: "They don’t have the guts!" }
-    ];
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
 
-    function newJoke() {
-      const setupEl = document.getElementById("setup");
-      const punchlineEl = document.getElementById("punchline");
+    const scale = 20;
+    const rows = canvas.height / scale;
+    const columns = canvas.width / scale;
 
-      const joke = jokes[Math.floor(Math.random() * jokes.length)];
+    let snake;
+    let food;
+    let score;
+    let gameOver;
 
-      setupEl.textContent = joke.setup;
-      punchlineEl.textContent = ""; // Clear punchline first
+    (function setup() {
+      snake = new Snake();
+      food = new Food();
+      score = 0;
+      gameOver = false;
 
-      // Reveal the punchline after 2 seconds
+      window.addEventListener('keydown', e => {
+        if (e.key === 'ArrowUp' && snake.ySpeed !== scale) {
+          snake.changeDirection(0, -scale);
+        } else if (e.key === 'ArrowDown' && snake.ySpeed !== -scale) {
+          snake.changeDirection(0, scale);
+        } else if (e.key === 'ArrowLeft' && snake.xSpeed !== scale) {
+          snake.changeDirection(-scale, 0);
+        } else if (e.key === 'ArrowRight' && snake.xSpeed !== -scale) {
+          snake.changeDirection(scale, 0);
+        }
+      });
+
+      window.requestAnimationFrame(gameLoop);
+    })();
+
+    function gameLoop() {
+      if (gameOver) {
+        document.getElementById('gameOver').style.display = 'block';
+        return;
+      }
+
       setTimeout(() => {
-        punchlineEl.textContent = joke.punchline;
-      }, 2000);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        snake.update();
+        snake.draw();
+
+        food.draw();
+
+        checkCollision();
+        updateScore();
+
+        window.requestAnimationFrame(gameLoop);
+      }, 100);
+    }
+
+    function checkCollision() {
+      if (snake.x === food.x && snake.y === food.y) {
+        score++;
+        food.randomize();
+        snake.grow();
+      }
+
+      // Wall collisions
+      if (snake.x < 0 || snake.x >= canvas.width || snake.y < 0 || snake.y >= canvas.height) {
+        gameOver = true;
+      }
+
+      // Self collision
+      for (let i = 0; i < snake.tail.length; i++) {
+        if (snake.x === snake.tail[i].x && snake.y === snake.tail[i].y) {
+          gameOver = true;
+        }
+      }
+    }
+
+    function updateScore() {
+      document.getElementById('score').textContent = score;
+    }
+
+    class Snake {
+      constructor() {
+        this.x = 100;
+        this.y = 100;
+        this.xSpeed = scale;
+        this.ySpeed = 0;
+        this.tail = [];
+      }
+
+      draw() {
+        ctx.fillStyle = "#4CAF50";
+        for (let i = 0; i < this.tail.length; i++) {
+          ctx.fillRect(this.tail[i].x, this.tail[i].y, scale, scale);
+        }
+
+        ctx.fillRect(this.x, this.y, scale, scale);
+      }
+
+      update() {
+        this.tail.push({ x: this.x, y: this.y });
+        if (this.tail.length > score) {
+          this.tail.shift();
+        }
+
+        this.x += this.xSpeed;
+        this.y += this.ySpeed;
+      }
+
+      changeDirection(x, y) {
+        this.xSpeed = x;
+        this.ySpeed = y;
+      }
+
+      grow() {
+        this.tail.push({ x: this.x, y: this.y });
+      }
+    }
+
+    class Food {
+      constructor() {
+        this.x = 0;
+        this.y = 0;
+        this.randomize();
+      }
+
+      randomize() {
+        this.x = Math.floor(Math.random() * columns) * scale;
+        this.y = Math.floor(Math.random() * rows) * scale;
+      }
+
+      draw() {
+        ctx.fillStyle = "#FF5722";
+        ctx.fillRect(this.x, this.y, scale, scale);
+      }
     }
   </script>
 
