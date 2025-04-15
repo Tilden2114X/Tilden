@@ -1,150 +1,163 @@
 <!DOCTYPE html>
- <html lang="en">
- <head>
-   <meta charset="UTF-8">
-   <title>Joke Generator 😂</title>
-   <style>
-     body {
-       background: linear-gradient(135deg, #fddb92 0%, #d1fdff 100%);
-       font-family: 'Segoe UI', sans-serif;
-       display: flex;
-       flex-direction: column;
-       align-items: center;
-       justify-content: center;
-       min-height: 100vh;
-       padding: 20px;
-       text-align: center;
-       color: #333;
-       transition: background 0.5s ease;
-     }
- 
-     h1 {
-       font-size: 3rem;
-       margin-bottom: 10px;
-       text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-     }
- 
-     .joke-box {
- @@ -28,18 +30,22 @@
-       border-radius: 20px;
-       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-       max-width: 600px;
-       transition: box-shadow 0.3s ease;
-     }
- 
-     .setup {
-       font-size: 1.5rem;
-       font-weight: bold;
-       margin-bottom: 10px;
-       animation: fadeIn 1s ease-in-out;
-     }
- 
-     .punchline {
-       font-size: 1.3rem;
-       margin-top: 10px;
-       color: #555;
-       opacity: 0;
-       animation: fadeIn 2s ease-in-out forwards;
-     }
- 
-     button {
- @@ -52,16 +58,31 @@
-       margin-top: 20px;
-       margin-right: 10px;
-       cursor: pointer;
-       transition: background 0.3s;
-       transition: background 0.3s, transform 0.3s;
-     }
- 
-     button:hover {
-       background-color: #4834d4;
-       transform: scale(1.05);
-     }
- 
-     .nav-buttons {
-       margin-top: 30px;
-     }
- 
-     .nav-buttons button {
-       background-color: #e74c3c;
-       margin-right: 10px;
-     }
- 
-     .nav-buttons button:hover {
-       background-color: #c0392b;
-     }
- 
-     @keyframes fadeIn {
-       0% { opacity: 0; }
-       100% { opacity: 1; }
-     }
-   </style>
- </head>
- <body>
- @@ -82,55 +103,41 @@
- 
-   <script>
-     const jokes = [
- { setup: "Why did the math book look sad?", punchline: "Because it had too many problems." },
-{ setup: "What do you call a fish wearing a bowtie?", punchline: "Sofishticated." },
-{ setup: "Why can't your nose be 12 inches long?", punchline: "Because then it would be a foot!" },
-{ setup: "How do cows stay up to date?", punchline: "They read the moos-paper." },
-{ setup: "Why did the golfer bring two pairs of pants?", punchline: "In case he got a hole in one." },
-{ setup: "How does a penguin build its house?", punchline: "Igloos it together." },
-{ setup: "What did one wall say to the other?", punchline: "I'll meet you at the corner." },
-{ setup: "Why was the computer cold?", punchline: "It left its Windows open." },
-{ setup: "Why did the cookie go to the doctor?", punchline: "Because it was feeling crumby." },
-{ setup: "Why was the broom late?", punchline: "It swept in!" },
-{ setup: "How do you organize a space party?", punchline: "You planet." },
-{ setup: "Why did the chicken go to the séance?", punchline: "To talk to the other side." },
-{ setup: "What do you call a bear with no teeth?", punchline: "A gummy bear." },
-{ setup: "What do you call a sleeping bull?", punchline: "A bulldozer." },
-{ setup: "What did one plate say to the other?", punchline: "Lunch is on me!" },
-{ setup: "Why did the man run around his bed?", punchline: "Because he was trying to catch up on his sleep!" },
-{ setup: "How do you catch a squirrel?", punchline: "Climb a tree and act like a nut." },
-{ setup: "Why don’t scientists trust stairs?", punchline: "Because they’re always up to something." },
-{ setup: "What do you get when you cross a snowman and a vampire?", punchline: "Frostbite." },
-{ setup: "Why did the frog take the bus to work?", punchline: "His car got toad." },
-{ setup: "Why did the cow go to space?", punchline: "To see the moooon." },
-{ setup: "What did the janitor say when he jumped out of the closet?", punchline: "Supplies!" },
-{ setup: "Why was the calendar always so full?", punchline: "Because it had too many dates." },
-{ setup: "What happens when you eat aluminum foil?", punchline: "You sheet metal." },
-{ setup: "Why did the banana go to the hospital?", punchline: "Because it wasn’t peeling well." }
-       { setup: "Why don’t skeletons fight each other?", punchline: "Because they don’t have the guts." },
-       { setup: "I'm reading a book about anti-gravity.", punchline: "It's impossible to put down!" },
-       { setup: "Why did the scarecrow win an award?", punchline: "Because he was outstanding in his field!" },
-       { setup: "Parallel lines have so much in common…", punchline: "It’s a shame they’ll never meet." },
-       { setup: "What do you call fake spaghetti?", punchline: "An impasta!" },
-       { setup: "I told my wife she was drawing her eyebrows too high.", punchline: "She looked surprised." },
-       { setup: "Why did the bicycle fall over?", punchline: "Because it was two-tired." },
-       { setup: "I only know 25 letters of the alphabet.", punchline: "I don't know y." },
-       { setup: "Why don’t eggs tell each other secrets?", punchline: "Because they might crack up!" },
-       { setup: "What’s orange and sounds like a parrot?", punchline: "A carrot!" },
-       { setup: "What do you call cheese that isn’t yours?", punchline: "Nacho cheese!" },
-       { setup: "I told my computer I needed a break.", punchline: "Now it won’t stop sending me Kit-Kats!" },
-       { setup: "What did the ocean say to the beach?", punchline: "Nothing, it just waved." },
-       { setup: "Why can’t you hear a pterodactyl go to the bathroom?", punchline: "Because the P is silent." },
-       { setup: "Why don't skeletons ever fight each other?", punchline: "Because they don’t have the guts!" },
-       { setup: "Why did the tomato turn red?", punchline: "Because it saw the salad dressing!" },
-       { setup: "Why can’t you trust an atom?", punchline: "Because they make up everything!" },
-       { setup: "What did the grape do when it got stepped on?", punchline: "Nothing, but it let out a little wine!" }
-     ];
- 
-     function newJoke() {
-       const setupEl = document.getElementById("setup");
-       const punchlineEl = document.getElementById("punchline");
- 
-       const joke = jokes[Math.floor(Math.random() * jokes.length)];
- 
-       setupEl.textContent = joke.setup;
-       punchlineEl.textContent = ""; // Clear punchline first
- 
-       // Reveal the punchline after 2 seconds
-       setTimeout(() => {
-         punchlineEl.textContent = joke.punchline;
-       }, 2000);
-     }
-   </script>
- 
- </body>
- </html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Joke Generator 😂</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #fddb92 0%, #d1fdff 100%);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      text-align: center;
+      color: #333;
+      transition: background 0.5s ease;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .joke-box {
+      padding: 20px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .setup {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .punchline {
+      font-size: 1.3rem;
+      margin-top: 10px;
+      color: #555;
+      opacity: 0;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #6c5ce7;
+      color: white;
+      margin: 10px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    button:hover {
+      background-color: #4834d4;
+      transform: scale(1.05);
+    }
+
+    .nav-buttons {
+      margin-top: 30px;
+    }
+
+    .nav-buttons a button {
+      background-color: #e74c3c;
+    }
+
+    .nav-buttons a button:hover {
+      background-color: #c0392b;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Joke Generator 😂</h1>
+  <div class="joke-box">
+    <div id="setup" class="setup">Click the button to hear a joke!</div>
+    <div id="punchline" class="punchline"></div>
+  </div>
+  <button onclick="newJoke()">Tell Me a Joke</button>
+
+  <div class="nav-buttons">
+    <a href="scratch.html"><button>Return to Tiger Woods</button></a>
+    <a href="index.html"><button>Home Page</button></a>
+  </div>
+
+  <script>
+    const jokes = [
+      { setup: "Why did the math book look sad?", punchline: "Because it had too many problems." },
+      { setup: "What do you call a fish wearing a bowtie?", punchline: "Sofishticated." },
+      { setup: "Why can't your nose be 12 inches long?", punchline: "Because then it would be a foot!" },
+      { setup: "How do cows stay up to date?", punchline: "They read the moos-paper." },
+      { setup: "Why did the golfer bring two pairs of pants?", punchline: "In case he got a hole in one." },
+      { setup: "How does a penguin build its house?", punchline: "Igloos it together." },
+      { setup: "What did one wall say to the other?", punchline: "I'll meet you at the corner." },
+      { setup: "Why was the computer cold?", punchline: "It left its Windows open." },
+      { setup: "Why did the cookie go to the doctor?", punchline: "Because it was feeling crumby." },
+      { setup: "Why was the broom late?", punchline: "It swept in!" },
+      { setup: "How do you organize a space party?", punchline: "You planet." },
+      { setup: "Why did the chicken go to the séance?", punchline: "To talk to the other side." },
+      { setup: "What do you call a bear with no teeth?", punchline: "A gummy bear." },
+      { setup: "What do you call a sleeping bull?", punchline: "A bulldozer." },
+      { setup: "What did one plate say to the other?", punchline: "Lunch is on me!" },
+      { setup: "Why did the man run around his bed?", punchline: "Because he was trying to catch up on his sleep!" },
+      { setup: "How do you catch a squirrel?", punchline: "Climb a tree and act like a nut." },
+      { setup: "Why don’t scientists trust stairs?", punchline: "Because they’re always up to something." },
+      { setup: "What do you get when you cross a snowman and a vampire?", punchline: "Frostbite." },
+      { setup: "Why did the frog take the bus to work?", punchline: "His car got toad." },
+      { setup: "Why did the cow go to space?", punchline: "To see the moooon." },
+      { setup: "What did the janitor say when he jumped out of the closet?", punchline: "Supplies!" },
+      { setup: "Why was the calendar always so full?", punchline: "Because it had too many dates." },
+      { setup: "What happens when you eat aluminum foil?", punchline: "You sheet metal." },
+      { setup: "Why did the banana go to the hospital?", punchline: "Because it wasn’t peeling well." },
+      { setup: "Why don’t skeletons fight each other?", punchline: "Because they don’t have the guts." },
+      { setup: "I'm reading a book about anti-gravity.", punchline: "It's impossible to put down!" },
+      { setup: "Why did the scarecrow win an award?", punchline: "Because he was outstanding in his field!" },
+      { setup: "Parallel lines have so much in common…", punchline: "It’s a shame they’ll never meet." },
+      { setup: "What do you call fake spaghetti?", punchline: "An impasta!" },
+      { setup: "I told my wife she was drawing her eyebrows too high.", punchline: "She looked surprised." },
+      { setup: "Why did the bicycle fall over?", punchline: "Because it was two-tired." },
+      { setup: "I only know 25 letters of the alphabet.", punchline: "I don't know y." },
+      { setup: "Why don’t eggs tell each other secrets?", punchline: "Because they might crack up!" },
+      { setup: "What’s orange and sounds like a parrot?", punchline: "A carrot!" },
+      { setup: "What do you call cheese that isn’t yours?", punchline: "Nacho cheese!" },
+      { setup: "I told my computer I needed a break.", punchline: "Now it won’t stop sending me Kit-Kats!" },
+      { setup: "What did the ocean say to the beach?", punchline: "Nothing, it just waved." },
+      { setup: "Why can’t you hear a pterodactyl go to the bathroom?", punchline: "Because the P is silent." },
+      { setup: "Why did the tomato turn red?", punchline: "Because it saw the salad dressing!" },
+      { setup: "Why can’t you trust an atom?", punchline: "Because they make up everything!" },
+      { setup: "What did the grape do when it got stepped on?", punchline: "Nothing, but it let out a little wine!" }
+    ];
+
+    function newJoke() {
+      const setupEl = document.getElementById("setup");
+      const punchlineEl = document.getElementById("punchline");
+
+      const joke = jokes[Math.floor(Math.random() * jokes.length)];
+
+      setupEl.textContent = joke.setup;
+      punchlineEl.style.opacity = 0;
+
+      setTimeout(() => {
+        punchlineEl.textContent = joke.punchline;
+        punchlineEl.style.opacity = 1;
+      }, 2000);
+    }
+  </script>
+
+</body>
+</html>
